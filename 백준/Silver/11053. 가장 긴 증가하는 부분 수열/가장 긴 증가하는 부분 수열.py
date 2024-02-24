@@ -1,11 +1,11 @@
-N = int(input())
-A = list(map(int,input().split()))
+num_elements = int(input())
+input_sequence = list(map(int, input().split()))
 
-d = [1] * N
+dp_table = [1] * num_elements
 
-for i in range(1,N):
+for i in range(1, num_elements):
     for j in range(i):
-        if A[i] > A[j]:
-            d[i] = max(d[i],d[j]+1)
+        if input_sequence[i] > input_sequence[j]:
+            dp_table[i] = max(dp_table[i], dp_table[j] + 1)
 
-print(max(d))
+print(max(dp_table))
