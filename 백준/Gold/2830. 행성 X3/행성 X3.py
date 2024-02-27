@@ -1,1 +1,2 @@
-import sys;N,*l=map(int,sys.stdin.read().split());d=[sum(i>>j&1 for i in l)for j in range(20)];print(sum(d[i]*(N-d[i])*(1<<i)for i in range(20)))
+N,*l=map(int,open(0).read().split())
+print(sum((d:=sum(i>>j&1 for i in l))*(N-d)*(1<<j)for j in range(20)))
