@@ -1,19 +1,18 @@
 import heapq as hq
 
-n, *l = map(int, open(0).read().rsplit())
-hl = []
-hr = []
+# 입력 받기
+n, *nums = map(int, open(0).read().rsplit())
 
-for i in l:
-    if len(hl) == len(hr):
-        hq.heappush(hl, -i)
-    else:
-        hq.heappush(hr, i)
+left_max_heap = []
+right_min_heap = []
+toggle = True
 
-    if hr and hr[0] < -hl[0]:
-        a = hq.heappop(hl)
-        b = hq.heappop(hr)
-        hq.heappush(hl, -b)
-        hq.heappush(hr, -a)
+for num in nums:
+    hq.heappush(left_max_heap, -num) if toggle else hq.heappush(right_min_heap, num)
+    toggle = not toggle
 
-    print(-hl[0])
+    if right_min_heap and right_min_heap[0] < -left_max_heap[0]:
+        hq.heappush(left_max_heap, -hq.heappop(right_min_heap))
+        hq.heappush(right_min_heap, -hq.heappop(left_max_heap))
+
+    print(-left_max_heap[0])
